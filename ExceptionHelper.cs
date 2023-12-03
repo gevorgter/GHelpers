@@ -1,10 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics.CodeAnalysis;
 
 namespace GHelpers
 {
-    internal class ExceptionHelper
+    public static class ExceptionHelper
     {
+        public static void ThrowApplicationExceptionIfNull([NotNull] this object o, string message)
+        {
+            if (o == null)
+                throw new ApplicationException(message);
+        }
+
+        public static void ThrowExceptionIfNull([NotNull] this object o, string message)
+        {
+            if (o == null)
+                throw new Exception(message);
+        }
     }
 }
