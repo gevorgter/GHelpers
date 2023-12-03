@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GHelpers
+namespace SqlHelper
 {
     public class Class1
     {
