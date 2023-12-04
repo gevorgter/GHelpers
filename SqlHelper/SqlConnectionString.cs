@@ -16,7 +16,7 @@ namespace SqlHelper
         public static SqlConnectionString FromConfig(IConfiguration config, string sectionName = "db")
         {
             var connectionString = config.GetConnectionString(sectionName);
-            connectionString.ThrowExceptionIfNull("Missing section {0} for connection string", sectionName);
+            connectionString.ThrowExceptionIfNull("Missing connection string {0}", sectionName);
             return new SqlConnectionString()
             {
                 connectionString = connectionString,

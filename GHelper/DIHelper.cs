@@ -64,11 +64,11 @@ namespace GHelpers
             {
                 var useMethod = t.GetMethod("Use");
                 useMethod?.Invoke(null, new object[] { serviceCollection });
-                if (t.IsAssignableFrom(typeof(ISingleton)))
+                if (typeof(ISingleton).IsAssignableFrom(t))
                     serviceCollection.AddSingleton(t);
-                if (t.IsAssignableFrom(typeof(IScoped)))
+                if (typeof(IScoped).IsAssignableFrom(t))
                     serviceCollection.AddScoped(t);
-                if (t.IsAssignableFrom(typeof(ITransient)))
+                if (typeof(ITransient).IsAssignableFrom(t))
                     serviceCollection.AddTransient(t);
             }
             return serviceCollection;
