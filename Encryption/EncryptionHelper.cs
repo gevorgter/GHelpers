@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace GEncryption
+namespace GHelpers
 {
     public static class EncryptionHelper
     {
@@ -31,17 +31,12 @@ namespace GEncryption
             };
         }
 
-        public static IServiceCollection UseEncryption(this IServiceCollection serviceCollection, string sectionName = "Encryption")
+        public static IServiceCollection UseEncryption(this IServiceCollection serviceCollection, IConfiguration config, string sectionName = "Encryption")
         {
-            serviceCollection.AddSingleton<IEncrypt>(opt =>
-            {
-                var config = opt.GetRequiredService<IConfiguration>();
-                var sec = config.GetSection(sectionName).Get<EncryptionSection>();
-                var encryptor = new AESEncryption_V1();
-                encryptor.Init(sec);
-                _encryptorA = encryptor;
-                return encryptor;
-            });
+            var sec = config.GetSection(sectionName).Get<EncryptionSection>();
+            var encryptor = new AESEncryption_V1();
+            encryptor.Init(sec);
+            _encryptorA = encryptor;
             return serviceCollection;
         }
     }

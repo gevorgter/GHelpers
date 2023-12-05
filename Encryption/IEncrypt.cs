@@ -1,4 +1,4 @@
-﻿namespace GEncryption
+﻿namespace GHelpers
 {
     internal interface IEncrypt
     {

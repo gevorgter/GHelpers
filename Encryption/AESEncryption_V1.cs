@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
 
-namespace GEncryption
+namespace GHelpers
 {
 
     public class EncryptionSection

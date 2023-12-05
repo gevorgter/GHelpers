@@ -1,8 +1,7 @@
-﻿using GHelpers;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
 
-namespace MongoHelper
+namespace GHelpers
 {
     public struct MongoDb
     {

@@ -5,7 +5,7 @@ using MongoDB.Bson.Serialization.Serializers;
 using System;
 using System.Linq;
 
-namespace MongoHelper
+namespace GHelpers
 {
     interface IMongoDbClass
     {

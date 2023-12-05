@@ -1,8 +1,7 @@
-﻿using GHelpers;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 
-namespace SqlHelper
+namespace GHelpers
 {
     public struct SqlConnectionString
     {

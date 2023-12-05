@@ -30,5 +30,16 @@ namespace GHelpers
         {
             return source.Select((item, index) => (item, index));
         }
+
+        public static IEnumerable<int> Range(int stop, int step = 1)
+        {
+            return Range(0, stop, step);
+        }
+
+        public static IEnumerable<int> Range(int start, int stop, int step = 1)
+        {
+            for (int i = start; i < stop; i += step)
+                yield return i;
+        }
     }
 }
