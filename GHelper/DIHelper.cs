@@ -1,11 +1,15 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Linq;
-using System.Reflection;
 
 namespace GHelpers
 {
     public enum DIScope { Singleton = 0, Scoped = 1, Transient = 2 }
+
+    [System.AttributeUsage(System.AttributeTargets.Class)]
+    public class UseHelperAttribute : Attribute
+    {
+
+    }
 
     [System.AttributeUsage(System.AttributeTargets.Class)]
     public class DIHelperAttribute : Attribute
@@ -24,21 +28,18 @@ namespace GHelpers
 
     public static class DIHelper
     {
-        public static IServiceCollection UseDIHelper(this IServiceCollection serviceCollection, Type assemblyToScan)
-        {
-            var assembly = assemblyToScan.Assembly;
-            var allClasses = assembly.GetTypes().Where(t => !t.IsAbstract);
-            foreach (var t in allClasses)
-            {
-                var attr = t.GetCustomAttribute<DIHelperAttribute>(false);
-                if (attr == null)
-                    continue;
+        public static AttributeMap diHelperMapper = new AttributeMap(typeof(DIHelperAttribute), RegisterWithDI);
+        public static AttributeMap useHelperMapper = new AttributeMap(typeof(UseHelperAttribute), CallUseMethod);
 
-                var useMethod = t.GetMethod("Use");
-                useMethod?.Invoke(null, new object[] { serviceCollection });
-                RegisterTypeWithDi(serviceCollection, t, attr);
-            }
-            return serviceCollection;
+        public static void RegisterWithDI(IServiceCollection serviceCollection, Attribute attr, Type t)
+        {
+            RegisterTypeWithDi(serviceCollection, t, (DIHelperAttribute)attr);
+        }
+
+        public static void CallUseMethod(IServiceCollection serviceCollection, Attribute attr, Type t)
+        {
+            var useMethod = t.GetMethod("Use");
+            useMethod?.Invoke(null, new object[] { serviceCollection });
         }
 
         static void RegisterTypeWithDi(IServiceCollection serviceCollection, Type implementationType, DIHelperAttribute diKey)

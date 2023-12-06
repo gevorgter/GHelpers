@@ -5,9 +5,15 @@ using Test;
 
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
+
+AttributeMap[] attributeMap = new AttributeMap[] {
+    DIHelper.diHelperMapper,
+    DIHelper.useHelperMapper,
+};
+
 builder.Services
     .AddHostedService<App>()
-    .UseDIHelper(typeof(App));
+    .UseAssemblyScanner(typeof(App), attributeMap);
 
 
 using IHost host = builder.Build();

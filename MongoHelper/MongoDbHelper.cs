@@ -3,18 +3,25 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using System;
-using System.Linq;
 
 namespace GHelpers
 {
-    interface IMongoDbClass
+    [System.AttributeUsage(System.AttributeTargets.Class)]
+    public class MongoDbClassAttribute : Attribute
     {
+        public string? name;
 
+        public MongoDbClassAttribute(string? name = null)
+        {
+            this.name = name;
+        }
     }
 
     public static class MongoDbHelper
     {
-        public static IServiceCollection UseMongoDbHelper(this IServiceCollection serviceCollection, Type? assemblyToScan = null)
+        public static AttributeMap mongoDbHelperMapper = new AttributeMap(typeof(MongoDbClassAttribute), RegisterClassWithMongo);
+
+        public static IServiceCollection UseMongoDb(this IServiceCollection serviceCollection)
         {
 #pragma warning disable CS0618 // Type or member is obsolete
             BsonDefaults.GuidRepresentation = GuidRepresentation.Standard;
@@ -22,25 +29,16 @@ namespace GHelpers
             BsonSerializer.RegisterSerializer(typeof(decimal), new DecimalSerializer(BsonType.Decimal128));
             BsonSerializer.RegisterSerializer(typeof(decimal?), new NullableSerializer<decimal>(new DecimalSerializer(BsonType.Decimal128)));
             BsonSerializer.RegisterSerializer(new GuidSerializer(GuidRepresentation.Standard));
-
-            if (assemblyToScan != null)
-            {
-
-                Type baseType = typeof(IMongoDbClass);
-                var assembly = assemblyToScan.Assembly;
-                var allRepositories = assembly.GetTypes().Where(t => !t.IsAbstract && baseType.IsAssignableFrom(t));
-                foreach (var t in allRepositories)
-                    RegisterClassWithMongo(t);
-            }
-
             return serviceCollection;
         }
 
-        public static void RegisterClassWithMongo(Type t)
+        public static void RegisterClassWithMongo(IServiceCollection serviceCollection, Attribute attr, Type t)
         {
+            MongoDbClassAttribute attribute = (MongoDbClassAttribute)attr;
+            string name = attribute.name ?? t.ToString();
             var map = new BsonClassMap(t);
             map.AutoMap();
-            map.SetDiscriminator(t.ToString());
+            map.SetDiscriminator(name);
             BsonClassMap.RegisterClassMap(map);
         }
     }
