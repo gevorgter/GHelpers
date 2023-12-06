@@ -36,7 +36,7 @@ namespace GHelpers
             return serviceCollection;
         }
 
-        static void RegisterClassWithMongo(Type t)
+        public static void RegisterClassWithMongo(Type t)
         {
             var map = new BsonClassMap(t);
             map.AutoMap();
