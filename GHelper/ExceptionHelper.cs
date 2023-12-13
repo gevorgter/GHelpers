@@ -62,6 +62,12 @@ namespace GHelpers
                 throw new Exception(string.Format(message, p1, p2, p3));
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ThrowIfArrayIsShort([NotNull] this Array? array, int lenght, string message)
+        {
+            if (array == null || array.Length < lenght)
+                throw new ArgumentException(message);
+        }
 
     }
 }

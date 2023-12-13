@@ -34,8 +34,7 @@ namespace GHelpers
         public static IServiceCollection UseEncryption(this IServiceCollection serviceCollection, IConfiguration config, string sectionName = "Encryption")
         {
             var sec = config.GetSection(sectionName).Get<EncryptionSection>();
-            var encryptor = new AESEncryption_V1();
-            encryptor.Init(sec);
+            var encryptor = new AESEncryption_V1(sec);
             _encryptorA = encryptor;
             return serviceCollection;
         }

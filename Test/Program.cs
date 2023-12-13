@@ -13,8 +13,6 @@ AttributeMap[] attributeMap = new AttributeMap[] {
 
 builder.Services
     .AddHostedService<App>()
-    .UseAssemblyScanner(typeof(App), attributeMap);
-
-
+    .AddAttributeDefinedServices(typeof(App), attributeMap);
 using IHost host = builder.Build();
 await host.RunAsync();

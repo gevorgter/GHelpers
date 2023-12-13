@@ -17,7 +17,7 @@ namespace GHelpers
 
     public static class AssemblyScanner
     {
-        public static IServiceCollection UseAssemblyScanner(this IServiceCollection serviceCollection, Type assemblyToScan, params AttributeMap[] attributeMap)
+        public static IServiceCollection AddAttributeDefinedServices(this IServiceCollection serviceCollection, Type assemblyToScan, params AttributeMap[] attributeMap)
         {
             var assembly = assemblyToScan.Assembly;
             var allClasses = assembly.GetTypes();
