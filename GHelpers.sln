@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoHelper", "MongoHelper\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encryption", "Encryption\Encryption.csproj", "{4978C233-3A76-442E-89CE-7CAF12747E41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{9853DEA2-D061-4329-BE3C-A734A3408C3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{9853DEA2-D061-4329-BE3C-A734A3408C3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AWSFileSystem", "AWSFileSystem\AWSFileSystem.csproj", "{A7ECEF95-5B24-4FD5-97CC-6987499AB0CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{9853DEA2-D061-4329-BE3C-A734A3408C3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9853DEA2-D061-4329-BE3C-A734A3408C3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9853DEA2-D061-4329-BE3C-A734A3408C3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7ECEF95-5B24-4FD5-97CC-6987499AB0CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7ECEF95-5B24-4FD5-97CC-6987499AB0CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7ECEF95-5B24-4FD5-97CC-6987499AB0CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7ECEF95-5B24-4FD5-97CC-6987499AB0CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

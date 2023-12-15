@@ -1,10 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GHelpers
 {
     public static class LinqHelper
     {
+        public static void ForEach<T>(this IEnumerable<T>? source, Action<T> action)
+        {
+            if (source == null)
+                return;
+            foreach (var e in source)
+                action(e);
+        }
+
         public static IEnumerable<IEnumerable<T>> Batch<T>(this IEnumerable<T> fullList, int batchSize)
         {
             var batch = new List<T>(batchSize);

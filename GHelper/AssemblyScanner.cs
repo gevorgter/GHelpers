@@ -10,6 +10,8 @@ namespace GHelpers
         public Action<IServiceCollection, Attribute, Type> attributeHandler;
         public AttributeMap(Type attributeClass, Action<IServiceCollection, Attribute, Type> attributeHandler)
         {
+            if (!typeof(Attribute).IsAssignableFrom(attributeClass))
+                throw new Exception($"{attributeClass.Name} must inherit Attribute");
             this.attributeClass = attributeClass;
             this.attributeHandler = attributeHandler;
         }
